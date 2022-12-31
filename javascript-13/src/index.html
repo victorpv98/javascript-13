@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Javascript13</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  </head>
+  <body>
+    <app-root></app-root>
+    <form id="formulario">
+      <label>Ingrese la distancia recorrida (en km):</label>
+      <input type="number" id="distancia" />
+      <button type="button" onclick="calcularPago()">Calcular</button>
+    </form>
+    <p id="resultado"></p>
+    <script>
+      function calcularPago() {
+        var distancia = document.getElementById("distancia").value;
+
+        var tarifaFija = 250;
+        var tarifaExceso = 30;
+        var tarifaExcesoMayor = 20;
+        var descuento = 0.1;
+        var monto = 0;
+        if (distancia <= 300) {
+          monto = tarifaFija;
+        } else if (distancia > 300 && distancia <= 1000) {
+          monto = tarifaFija + (distancia - 300) * tarifaExceso;
+        } else {
+          monto =
+            tarifaFija +
+            (1000 - 300) * tarifaExceso +
+            (distancia - 1000) * tarifaExcesoMayor;
+        }
+
+        if (monto > 500) {
+          monto = monto - monto * descuento;
+        }
+
+        document.getElementById("resultado").innerHTML =
+          "El monto a pagar es: S/. " + monto;
+      }
+    </script>
+  </body>
+</html>
